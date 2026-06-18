@@ -3,22 +3,24 @@ export default {
     alias: ['remove'],
     category: 'group management',
     desc: 'Removes a user from the group',
-    execute: async ({ sock, msg, args, reply }) => {
+    execute: async ({ sock, msg, args, reply , settings}) => {
         if (!msg.key.remoteJid.endsWith('@g.us')) return reply('⚠️ This command can only be used in groups!');
 
         const mentioned = msg.message.extendedTextMessage?.contextInfo?.mentionedJid || [];
         const quotedParticipant = msg.message.extendedTextMessage?.contextInfo?.participant;
 
-        const usage = `╭───〔 *KICK USAGE* 〕───⊷\n` +
-            `│ kick tag\n` +
-            `│ Tag someone to kick\n` +
-            `│\n` +
-            `│ kick reply\n` +
-            `│ Reply a Message to kick\n` +
-            `│\n` +
-            `│ kick number\n` +
-            `│ Use number to kick\n` +
-            `╰──────────────────────⊷`;
+        const footer = settings?.footer || 'Powered by SBG';
+        const usage = `*╭───* *〔 KICK USAGE* *〔* *───⊷*\n` +
+            `*│* *kick tag*\n` +
+            `*│* Tag someone to kick\n` +
+            `*│*\n` +
+            `*│* *kick reply*\n` +
+            `*│* Reply a Message to kick\n` +
+            `*│*\n` +
+            `*│* *kick number*\n` +
+            `*│* Use number to kick\n` +
+            `*╰──────────────────────⊷*\n\n` +
+            `> *${footer}*`;
 
         let targets = [];
         if (mentioned.length > 0) {

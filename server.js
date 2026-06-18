@@ -107,7 +107,7 @@ async function startBot() {
             const prefix = settings?.prefix || process.env.PREFIX || '!';
             if (textContent.startsWith(prefix)) msgType = 'CMD';
             
-            console.log(`[${locationStr}] [${msgType}] From: ${sender?.split('@')[0]} | To: ${msg.key.remoteJid?.split('@')[0]} | Content: ${textContent.length > 50 ? textContent.substring(0, 47) + '...' : (textContent || '<media/other>')}`);
+            console.log(`[${locationStr}] [${msgType}] From: ${sender} | To: ${msg.key.remoteJid} | Content: ${textContent.length > 50 ? textContent.substring(0, 50) + '...' : (textContent || '<media>')}`);
         }
         
         // Anti-delete cache

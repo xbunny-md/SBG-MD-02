@@ -3,13 +3,15 @@ export default {
     alias: ['invite'],
     category: 'group management',
     desc: 'Adds a user to the group',
-    execute: async ({ sock, msg, args, reply }) => {
+    execute: async ({ sock, msg, args, reply , settings}) => {
         if (!msg.key.remoteJid.endsWith('@g.us')) return reply('⚠️ This command can only be used in groups!');
 
-        const usage = `╭───〔 *ADD USAGE* 〕───⊷\n` +
-            `│ add number\n` +
-            `│ Use number to add to group\n` +
-            `╰─────────────────────⊷`;
+        const footer = settings?.footer || 'Powered by SBG';
+        const usage = `*╭───* *〔 ADD USAGE 〕* *───⊷*\n` +
+            `*│* *add number*\n` +
+            `*│* Use number to add to group\n` +
+            `*╰──────────────────────⊷*\n\n` +
+            `> *${footer}*`;
 
         const num = args[0]?.replace(/[^0-9]/g, '');
         if (!num) return reply(usage);
